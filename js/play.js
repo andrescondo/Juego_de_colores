@@ -3,8 +3,10 @@ const violeta = document.getElementById('violeta')
 const naranja = document.getElementById('naranja')
 const verde = document.getElementById('verde')
 const btnEmpezar = document.getElementById('btnEmpezar')
-const ULTIMO_NIVEL = 1
+const ULTIMO_NIVEL = 2
 var nombre_jugador = prompt("¡Ingresa tu nombre!")
+
+/*----- ESTA ES LA RAMA PARA PONER EL NIVEL Y LOS PUNTOS----*/
 
 class Juego
 {
@@ -17,7 +19,7 @@ class Juego
 	}
 	inicializar()	
 
-	{			
+	{	
 		this.nombre_jugador
 		this.elegirColor= this.elegirColor.bind(this)
 		this.siguienteNivel = this.siguienteNivel.bind(this)
