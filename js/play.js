@@ -1,10 +1,13 @@
-const celeste = document.getElementById('celeste')
-const violeta = document.getElementById('violeta')
-const naranja = document.getElementById('naranja')
-const verde = document.getElementById('verde')
-const btnEmpezar = document.getElementById('btnEmpezar')
-const ULTIMO_NIVEL = 2
-var nombre_jugador = prompt("¡Ingresa tu nombre!")
+const celeste = document.getElementById('celeste');
+const violeta = document.getElementById('violeta');
+const naranja = document.getElementById('naranja');
+const verde = document.getElementById('verde');
+const btnEmpezar = document.getElementById('btnEmpezar');
+const ULTIMO_NIVEL = 3;
+var nombre_jugador = prompt("¡Ingresa tu nombre!");
+const level = document.getElementById('level');
+const source = document.getElementById('source');
+
 
 /*----- ESTA ES LA RAMA PARA PONER EL NIVEL Y LOS PUNTOS----*/
 
@@ -12,10 +15,10 @@ class Juego
 {
 	constructor()
 	{
-		this.inicializar=this.inicializar.bind(this)
-		this.inicializar()
-		this.generarSecuencia()
-		setTimeout(this.siguienteNivel(),500)
+		this.inicializar=this.inicializar.bind(this);
+		this.inicializar();
+		this.generarSecuencia();
+		setTimeout(this.siguienteNivel(),500);
 	}
 	inicializar()	
 
@@ -29,8 +32,9 @@ class Juego
 			celeste,
 			violeta,
 			naranja,
-			verde
-		}
+			verde}
+		level.innerHTML= `Nivel:${this.nivel}` 
+		source.innerHTML= `Puntos:`
 	}
 
 	toggleBtnEmpezar()
@@ -125,6 +129,14 @@ class Juego
 		this.colores.verde.removeEventListener('click', this.elegirColor)
 	}
 
+	levelUp()
+	{
+		if(this.subNivel === this.nivel)
+		{
+			level.innerHTML = `Nivel:${this.nivel + 1}`
+		}
+	}
+
 
 	elegirColor(ev)
 	{
@@ -134,18 +146,23 @@ class Juego
 		if(numeroColor === this.secuencia[this.subNivel])
 		{
 			this.subNivel++
+			
 			if(this.subNivel === this.nivel)
 			{
+				this.levelUp()
 				this.nivel++
+				
 				this.eliminarEventoClick()
 
 				if(this.nivel === (ULTIMO_NIVEL + 1))
 				{
 					this.ganoElJuego()
+					level.innerHTML = ''
 				}
 				else
 				{
-					setTimeout(this.siguienteNivel, 2000) 
+					setTimeout(this.siguienteNivel, 2000)
+					
 				}
 			
 			}
@@ -166,7 +183,7 @@ class Juego
 
 	perdioElJuego()
 	{
-		swal('Simon dice', 'Lo lamentamos, perdiste :(', 'error')
+		swal(nombre_jugador, 'Lo lamentamos, perdiste :(', 'error')
 		.then(() =>
 		{
 			this.eliminarEventoClick()
@@ -179,3 +196,4 @@ function empezarJuego()
 {
 	window.juego = new Juego()
 }
+	

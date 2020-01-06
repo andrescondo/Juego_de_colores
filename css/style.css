@@ -6,6 +6,22 @@ body
 	display: flex;
 	align-items: center;
 	height: 100vh;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.hero
+{
+	color: #fff;
+	font-family: 'Press Start 2P', cursive;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+	font-size: 30px;
+}
+
+.puntos
+{
+	margin-top: 20px;
 }
 
 .gameboard
@@ -100,8 +116,9 @@ body
 	display: none;
 }
 
-*
+/**
 {
 	font-family: 'Source Sans Pro', sans-serif;
 	/*font-family: 'Press Start 2P', cursive;*/
 }
+*/
