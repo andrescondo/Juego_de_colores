@@ -3,7 +3,7 @@ const violeta = document.getElementById('violeta');
 const naranja = document.getElementById('naranja');
 const verde = document.getElementById('verde');
 const btnEmpezar = document.getElementById('btnEmpezar');
-const ULTIMO_NIVEL = 3;
+const ULTIMO_NIVEL = 20;
 var nombre_jugador = prompt("¡Ingresa tu nombre!");
 const level = document.getElementById('level');
 const source = document.getElementById('source');
@@ -18,7 +18,7 @@ class Juego
 		this.inicializar=this.inicializar.bind(this);
 		this.inicializar();
 		this.generarSecuencia();
-		setTimeout(this.siguienteNivel(),500);
+		setTimeout(this.siguienteNivel(),800);
 	}
 	inicializar()	
 
@@ -28,13 +28,14 @@ class Juego
 		this.siguienteNivel = this.siguienteNivel.bind(this)
 		this.toggleBtnEmpezar()
 		this.nivel = 1
+		this.puntos = 0
 		this.colores = { 
 			celeste,
 			violeta,
 			naranja,
 			verde}
 		level.innerHTML= `Nivel:${this.nivel}` 
-		source.innerHTML= `Puntos:`
+		source.innerHTML= `Puntos:${this.puntos}`
 	}
 
 	toggleBtnEmpezar()
@@ -98,7 +99,22 @@ class Juego
 		for(let i =0 ; i <this.nivel; i++ )
 		{
 			const color = this.transformarNumeroAColor(this.secuencia[i])
-			setTimeout(()=>this.iluminarColor(color), 1000*i) 
+			this.puntos += 10
+			if(this.nivel > 5)
+			{
+				setTimeout(()=>this.iluminarColor(color), 920*i)
+
+				if(this.nivel > 10)
+				{
+				setTimeout(()=>this.iluminarColor(color), 850*i)
+				}
+			}
+			else
+			{
+				setTimeout(()=>this.iluminarColor(color), 1000*i)
+			}
+			
+			 
 		}
 	}
 
@@ -137,6 +153,14 @@ class Juego
 		}
 	}
 
+	sourceUp()
+	{
+		if(this.iluminarSecuencia)
+		{
+			source.innerHTML = `Puntos:${this.puntos}`
+		}
+	}
+
 
 	elegirColor(ev)
 	{
@@ -145,13 +169,12 @@ class Juego
 		this.iluminarColor(nombreColor)
 		if(numeroColor === this.secuencia[this.subNivel])
 		{
-			this.subNivel++
-			
+			this.subNivel++	
 			if(this.subNivel === this.nivel)
 			{
 				this.levelUp()
 				this.nivel++
-				
+				this.sourceUp()
 				this.eliminarEventoClick()
 
 				if(this.nivel === (ULTIMO_NIVEL + 1))
@@ -194,6 +217,6 @@ class Juego
 
 function empezarJuego()
 {
-	window.juego = new Juego()
+	let juego = new Juego()
 }
 	
