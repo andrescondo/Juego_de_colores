@@ -41,8 +41,8 @@ body
 .volver a
 {
 	text-decoration: none;
-
 }
+
 
 .gameboard
 {
@@ -136,9 +136,12 @@ body
 	display: none;
 }
 
-/**
+@media screen and (max-width: 1023px)
 {
-	font-family: 'Source Sans Pro', sans-serif;
-	/*font-family: 'Press Start 2P', cursive;*/
+	.volver
+	{
+		font-size: 16px;
+	}
+
 }
-*/
+
