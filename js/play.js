@@ -3,7 +3,7 @@ const violeta = document.getElementById('violeta');
 const naranja = document.getElementById('naranja');
 const verde = document.getElementById('verde');
 const btnEmpezar = document.getElementById('btnEmpezar');
-const ULTIMO_NIVEL = 15;
+const ULTIMO_NIVEL = 10;
 var nombre_jugador = prompt("¡Ingresa tu nombre!  Pon aceptar para poder jugar");
 const level = document.getElementById('level');
 const source = document.getElementById('source');
@@ -104,7 +104,7 @@ class Juego
 			{
 				setTimeout(()=>this.iluminarColor(color), 920*i)
 
-				if(this.nivel > 10)
+				if(this.nivel > 7)
 				{
 				setTimeout(()=>this.iluminarColor(color), 850*i)
 				}
